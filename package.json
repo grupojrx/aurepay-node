@@ -1,0 +1,45 @@
+{
+  "name": "@aurepay/sdk",
+  "version": "0.1.0",
+  "description": "SDK oficial da API AurePay para Node.js / TypeScript (tipado via OpenAPI)",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "prepublishOnly": "npm run build"
+  },
+  "license": "MIT",
+  "keywords": [
+    "aurepay",
+    "pix",
+    "payments",
+    "brazil",
+    "sdk",
+    "openapi"
+  ],
+  "homepage": "https://api.aurepay.com.br/docs/sdks",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/grupojrx/aurepay-node.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.0"
+  }
+}
