@@ -72,9 +72,33 @@ export type ConversionCreate = {
 };
 
 export type WalletCreate = {
-    name?: string;
-    metadata?: {
-        [key: string]: unknown;
+    name: string;
+    externalId?: string;
+    /**
+     * CNPJ obrigatório no modo walletMode=kyc
+     */
+    taxId?: string;
+    /**
+     * E-mail do titular para convite KYC (modo kyc)
+     */
+    email?: string;
+    /**
+     * Telefone do titular para convite KYC (modo kyc)
+     */
+    phone?: string;
+};
+
+export type WalletVerification = {
+    status?: 'invited' | 'submitted' | 'approved' | 'rejected' | 'rejectedTerminal';
+    inviteEmail?: string;
+    invitePhone?: string;
+    rejection?: {
+        terminal?: boolean;
+        reasons?: Array<{
+            code?: string;
+            field?: string;
+            message?: string;
+        }>;
     };
 };
 
@@ -526,3 +550,35 @@ export type WalletsGetResponses = {
 };
 
 export type WalletsGetResponse = WalletsGetResponses[keyof WalletsGetResponses];
+
+export type WalletsVerificationResendData = {
+    body?: {
+        email?: string;
+    };
+    path: {
+        /**
+         * Identificador ULID do recurso
+         */
+        id: string;
+    };
+    query?: never;
+    url: '/wallets/{id}/verification/resend';
+};
+
+export type WalletsVerificationResendErrors = {
+    /**
+     * Status não permite reenvio
+     */
+    400: ErrorBody;
+};
+
+export type WalletsVerificationResendError = WalletsVerificationResendErrors[keyof WalletsVerificationResendErrors];
+
+export type WalletsVerificationResendResponses = {
+    /**
+     * Convite reenviado (inclui onboardingUrl)
+     */
+    200: SuccessEnvelope;
+};
+
+export type WalletsVerificationResendResponse = WalletsVerificationResendResponses[keyof WalletsVerificationResendResponses];

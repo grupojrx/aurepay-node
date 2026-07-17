@@ -2,7 +2,7 @@
 
 import { client } from './client.gen.js';
 import type { Client, ClientMeta, Options as Options2, RequestResult, TDataShape } from './client/index.js';
-import type { ChargebacksGetData, ChargebacksGetResponses, ChargebacksListData, ChargebacksListResponses, CompanyBalanceData, CompanyBalanceResponses, CompanyGetData, CompanyGetResponses, ConversionsCreateData, ConversionsCreateResponses, ConversionsGetData, ConversionsGetResponses, ConversionsListData, ConversionsListResponses, ConversionsQuoteData, ConversionsQuoteResponses, DepositsCreateData, DepositsCreateErrors, DepositsCreateResponses, DepositsGetData, DepositsGetErrors, DepositsGetResponses, DepositsListData, DepositsListErrors, DepositsListResponses, DepositsRefundData, DepositsRefundResponses, WalletsCreateData, WalletsCreateResponses, WalletsGetData, WalletsGetResponses, WalletsListData, WalletsListResponses, WebhooksCreateData, WebhooksCreateResponses, WebhooksDeleteData, WebhooksDeleteResponses, WebhooksGetData, WebhooksGetResponses, WebhooksListData, WebhooksListResponses, WebhooksUpdateData, WebhooksUpdateResponses, WithdrawalsCreateData, WithdrawalsCreateResponses, WithdrawalsGetData, WithdrawalsGetResponses, WithdrawalsListData, WithdrawalsListResponses } from './types.gen.js';
+import type { ChargebacksGetData, ChargebacksGetResponses, ChargebacksListData, ChargebacksListResponses, CompanyBalanceData, CompanyBalanceResponses, CompanyGetData, CompanyGetResponses, ConversionsCreateData, ConversionsCreateResponses, ConversionsGetData, ConversionsGetResponses, ConversionsListData, ConversionsListResponses, ConversionsQuoteData, ConversionsQuoteResponses, DepositsCreateData, DepositsCreateErrors, DepositsCreateResponses, DepositsGetData, DepositsGetErrors, DepositsGetResponses, DepositsListData, DepositsListErrors, DepositsListResponses, DepositsRefundData, DepositsRefundResponses, WalletsCreateData, WalletsCreateResponses, WalletsGetData, WalletsGetResponses, WalletsListData, WalletsListResponses, WalletsVerificationResendData, WalletsVerificationResendErrors, WalletsVerificationResendResponses, WebhooksCreateData, WebhooksCreateResponses, WebhooksDeleteData, WebhooksDeleteResponses, WebhooksGetData, WebhooksGetResponses, WebhooksListData, WebhooksListResponses, WebhooksUpdateData, WebhooksUpdateResponses, WithdrawalsCreateData, WithdrawalsCreateResponses, WithdrawalsGetData, WithdrawalsGetResponses, WithdrawalsListData, WithdrawalsListResponses } from './types.gen.js';
 
 export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends boolean = boolean, TResponse = unknown> = Options2<TData, ThrowOnError, TResponse> & {
     /**
@@ -251,4 +251,17 @@ export const walletsGet = <ThrowOnError extends boolean = false>(options: Option
     security: [{ name: 'X-Api-Key', type: 'apiKey' }, { name: 'X-Api-Secret', type: 'apiKey' }],
     url: '/wallets/{id}',
     ...options
+});
+
+/**
+ * Reenvia convite de verificação KYC
+ */
+export const walletsVerificationResend = <ThrowOnError extends boolean = false>(options: Options<WalletsVerificationResendData, ThrowOnError>): RequestResult<WalletsVerificationResendResponses, WalletsVerificationResendErrors, ThrowOnError> => (options.client ?? client).post<WalletsVerificationResendResponses, WalletsVerificationResendErrors, ThrowOnError>({
+    security: [{ name: 'X-Api-Key', type: 'apiKey' }, { name: 'X-Api-Secret', type: 'apiKey' }],
+    url: '/wallets/{id}/verification/resend',
+    ...options,
+    headers: {
+        'Content-Type': 'application/json',
+        ...options.headers
+    }
 });
