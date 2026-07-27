@@ -191,6 +191,36 @@ export type DepositsGetResponses = {
 
 export type DepositsGetResponse = DepositsGetResponses[keyof DepositsGetResponses];
 
+export type DepositsGetPayloadData = {
+    body?: never;
+    path: {
+        /**
+         * Identificador ULID do recurso
+         */
+        id: string;
+    };
+    query?: never;
+    url: '/deposits/{id}/payload';
+};
+
+export type DepositsGetPayloadErrors = {
+    /**
+     * Depósito ou payload não encontrado / removido (TTL)
+     */
+    404: ErrorBody;
+};
+
+export type DepositsGetPayloadError = DepositsGetPayloadErrors[keyof DepositsGetPayloadErrors];
+
+export type DepositsGetPayloadResponses = {
+    /**
+     * Payload mascarado (request/response)
+     */
+    200: SuccessEnvelope;
+};
+
+export type DepositsGetPayloadResponse = DepositsGetPayloadResponses[keyof DepositsGetPayloadResponses];
+
 export type DepositsRefundData = {
     body?: never;
     path: {
@@ -264,6 +294,36 @@ export type WithdrawalsGetResponses = {
 };
 
 export type WithdrawalsGetResponse = WithdrawalsGetResponses[keyof WithdrawalsGetResponses];
+
+export type WithdrawalsGetPayloadData = {
+    body?: never;
+    path: {
+        /**
+         * Identificador ULID do recurso
+         */
+        id: string;
+    };
+    query?: never;
+    url: '/withdrawals/{id}/payload';
+};
+
+export type WithdrawalsGetPayloadErrors = {
+    /**
+     * Saque ou payload não encontrado / removido (TTL)
+     */
+    404: ErrorBody;
+};
+
+export type WithdrawalsGetPayloadError = WithdrawalsGetPayloadErrors[keyof WithdrawalsGetPayloadErrors];
+
+export type WithdrawalsGetPayloadResponses = {
+    /**
+     * Payload mascarado (request/response)
+     */
+    200: SuccessEnvelope;
+};
+
+export type WithdrawalsGetPayloadResponse = WithdrawalsGetPayloadResponses[keyof WithdrawalsGetPayloadResponses];
 
 export type WebhooksListData = {
     body?: never;

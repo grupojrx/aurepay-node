@@ -2,7 +2,7 @@
 
 import { client } from './client.gen.js';
 import type { Client, ClientMeta, Options as Options2, RequestResult, TDataShape } from './client/index.js';
-import type { ChargebacksGetData, ChargebacksGetResponses, ChargebacksListData, ChargebacksListResponses, CompanyBalanceData, CompanyBalanceResponses, CompanyGetData, CompanyGetResponses, ConversionsCreateData, ConversionsCreateResponses, ConversionsGetData, ConversionsGetResponses, ConversionsListData, ConversionsListResponses, ConversionsQuoteData, ConversionsQuoteResponses, DepositsCreateData, DepositsCreateErrors, DepositsCreateResponses, DepositsGetData, DepositsGetErrors, DepositsGetResponses, DepositsListData, DepositsListErrors, DepositsListResponses, DepositsRefundData, DepositsRefundResponses, WalletsCreateData, WalletsCreateResponses, WalletsGetData, WalletsGetResponses, WalletsListData, WalletsListResponses, WalletsVerificationResendData, WalletsVerificationResendErrors, WalletsVerificationResendResponses, WebhooksCreateData, WebhooksCreateResponses, WebhooksDeleteData, WebhooksDeleteResponses, WebhooksGetData, WebhooksGetResponses, WebhooksListData, WebhooksListResponses, WebhooksUpdateData, WebhooksUpdateResponses, WithdrawalsCreateData, WithdrawalsCreateResponses, WithdrawalsGetData, WithdrawalsGetResponses, WithdrawalsListData, WithdrawalsListResponses } from './types.gen.js';
+import type { ChargebacksGetData, ChargebacksGetResponses, ChargebacksListData, ChargebacksListResponses, CompanyBalanceData, CompanyBalanceResponses, CompanyGetData, CompanyGetResponses, ConversionsCreateData, ConversionsCreateResponses, ConversionsGetData, ConversionsGetResponses, ConversionsListData, ConversionsListResponses, ConversionsQuoteData, ConversionsQuoteResponses, DepositsCreateData, DepositsCreateErrors, DepositsCreateResponses, DepositsGetData, DepositsGetErrors, DepositsGetPayloadData, DepositsGetPayloadErrors, DepositsGetPayloadResponses, DepositsGetResponses, DepositsListData, DepositsListErrors, DepositsListResponses, DepositsRefundData, DepositsRefundResponses, WalletsCreateData, WalletsCreateResponses, WalletsGetData, WalletsGetResponses, WalletsListData, WalletsListResponses, WalletsVerificationResendData, WalletsVerificationResendErrors, WalletsVerificationResendResponses, WebhooksCreateData, WebhooksCreateResponses, WebhooksDeleteData, WebhooksDeleteResponses, WebhooksGetData, WebhooksGetResponses, WebhooksListData, WebhooksListResponses, WebhooksUpdateData, WebhooksUpdateResponses, WithdrawalsCreateData, WithdrawalsCreateResponses, WithdrawalsGetData, WithdrawalsGetPayloadData, WithdrawalsGetPayloadErrors, WithdrawalsGetPayloadResponses, WithdrawalsGetResponses, WithdrawalsListData, WithdrawalsListResponses } from './types.gen.js';
 
 export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends boolean = boolean, TResponse = unknown> = Options2<TData, ThrowOnError, TResponse> & {
     /**
@@ -50,6 +50,18 @@ export const depositsGet = <ThrowOnError extends boolean = false>(options: Optio
 });
 
 /**
+ * Payload request/response do depósito
+ *
+ * Retorna o request e o response da chamada de API que criou o depósito. Retenção de 90 dias; após isso responde PAYLOAD_NOT_FOUND.
+ *
+ */
+export const depositsGetPayload = <ThrowOnError extends boolean = false>(options: Options<DepositsGetPayloadData, ThrowOnError>): RequestResult<DepositsGetPayloadResponses, DepositsGetPayloadErrors, ThrowOnError> => (options.client ?? client).get<DepositsGetPayloadResponses, DepositsGetPayloadErrors, ThrowOnError>({
+    security: [{ name: 'X-Api-Key', type: 'apiKey' }, { name: 'X-Api-Secret', type: 'apiKey' }],
+    url: '/deposits/{id}/payload',
+    ...options
+});
+
+/**
  * Estorna depósito PIX liquidado
  */
 export const depositsRefund = <ThrowOnError extends boolean = false>(options: Options<DepositsRefundData, ThrowOnError>): RequestResult<DepositsRefundResponses, unknown, ThrowOnError> => (options.client ?? client).post<DepositsRefundResponses, unknown, ThrowOnError>({
@@ -86,6 +98,18 @@ export const withdrawalsCreate = <ThrowOnError extends boolean = false>(options:
 export const withdrawalsGet = <ThrowOnError extends boolean = false>(options: Options<WithdrawalsGetData, ThrowOnError>): RequestResult<WithdrawalsGetResponses, unknown, ThrowOnError> => (options.client ?? client).get<WithdrawalsGetResponses, unknown, ThrowOnError>({
     security: [{ name: 'X-Api-Key', type: 'apiKey' }, { name: 'X-Api-Secret', type: 'apiKey' }],
     url: '/withdrawals/{id}',
+    ...options
+});
+
+/**
+ * Payload request/response do saque
+ *
+ * Retorna o request e o response da chamada de API que criou o saque. Retenção de 90 dias; após isso responde PAYLOAD_NOT_FOUND.
+ *
+ */
+export const withdrawalsGetPayload = <ThrowOnError extends boolean = false>(options: Options<WithdrawalsGetPayloadData, ThrowOnError>): RequestResult<WithdrawalsGetPayloadResponses, WithdrawalsGetPayloadErrors, ThrowOnError> => (options.client ?? client).get<WithdrawalsGetPayloadResponses, WithdrawalsGetPayloadErrors, ThrowOnError>({
+    security: [{ name: 'X-Api-Key', type: 'apiKey' }, { name: 'X-Api-Secret', type: 'apiKey' }],
+    url: '/withdrawals/{id}/payload',
     ...options
 });
 
