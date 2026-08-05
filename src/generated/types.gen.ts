@@ -37,7 +37,6 @@ export type DepositCreate = {
      */
     amount: number;
     reference: string;
-    expiration?: string;
     callbackUrl?: string;
     customer?: CustomerInput;
     metadata?: {
